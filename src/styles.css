@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  height: 100%;
+  width: 100%;
+  background: url('assets/img/app/fondo.png'), url('assets/img/app/espoch-body.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 :root {
   --color-principal: #e91d43;
   --rojo-transparente: rgba(240, 66, 75, 0.164);
@@ -7,13 +16,32 @@
   --negro-transp: rgba(0, 0, 0, 0.203);
   --azul:#007bff;
 }
-body {
-    height: 100vh;
-    width: 100%;
-    background: url('assets/img/app/fondo.png'), url('assets/img/app/espoch-body.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
+.fondo{
+  background: #fff;
+}
+
+.scroll-to-top {
+  background: var(--blanco-transp);
+  border-bottom: 1px solid var(--color-principal);
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+ }
+ .show-scrollTop {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+ }
+
+.nav-search{
+border-bottom: 3px solid red;
+
+}
+.nav-search:hover{
+cursor: pointer;
+border-bottom: solid 1px red;
+}
 .navbar-light{
   background: #fff;
 }
@@ -31,6 +59,12 @@ body {
 .card-header{
   font-weight: bold;
 }
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .toast-container{
   width: 10rem;
   background: #fff;
@@ -269,6 +303,7 @@ input[type=text], input[type=password], input[type=email] {
   margin: 5px;
   width: 85%;
   border: 2px solid #f6f6f6;
+  border-bottom: #04c582 solid 1px;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;

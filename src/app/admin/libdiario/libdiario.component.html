@@ -1,0 +1,41 @@
+<h1 class="text-center">{{AdminTitle}}</h1>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="addLibClick()"
+        data-backdrop="static" data-keyboard="false">
+        Nuevo
+    </button>
+    <button routerLink="show-lib" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Listar
+    </button>
+    <button routerLink="search-lib" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Buscar
+    </button>
+    <button routerLink="/admin" type="button" class="btn btn-secondary" data-backdrop="static" data-keyboard="false">
+        Regresar
+    </button>
+</div>
+<!-- <div class="form-group row"></div> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-lib [lib]="lib" *ngIf="ActivatedAddEditLibComp"></app-add-edit-lib>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>
+<!-- <app-show-ct></app-show-ct> -->

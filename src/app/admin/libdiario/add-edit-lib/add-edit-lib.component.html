@@ -1,0 +1,25 @@
+
+<p>del Add -ast</p>
+
+
+<div class="form-froup" >
+    <label class="col-sm-5 col-form-label">Fecha inicio</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control" [(ngModel)]="fechini_libdiario">
+    </div>
+    <label class="col-sm-4 col-form-label">Fecha Fin</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control"  [(ngModel)]="fechfin_libdiario" (ngModelChange)="capturar()">
+    </div>
+    <label class="col-sm-5 col-form-label">Codigo</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" [(ngModel)]="nume_libdiario" disabled>
+    </div>
+</div>
+
+
+<button (click)="addLibros()" *ngIf="lib.id_libdiario==0" class="btn btn-primary">
+    Ingresar
+</button>
+
+<button (click)="updateLibros()" *ngIf="lib.id_libdiario!=0" class="btn btn-primary">Editar</button>

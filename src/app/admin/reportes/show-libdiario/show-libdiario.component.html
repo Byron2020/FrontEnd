@@ -1,0 +1,172 @@
+<div class="modal-dialog-centered " >
+    <label class="col-sm-2 col-form-label fondo">LIBRO DIARIO</label>
+    <div class="col-sm-3 ">
+        
+        <select class="form-control" [(ngModel)]="dato_select" (change)="buscarClick2(dato_select)">
+            <option value="">--MES--</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+
+
+<table *ngIf="ActivarTablaLib" class="table table-hover navbar-light">
+    <thead>
+        <tr>
+            <th>#Libro</th>
+            <th>F inicio</th>
+            <th>F fin</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of LibrosList">
+            <td>{{dataItem.id_libdiario}}</td>
+            <td>{{dataItem.fechini_libdiario}}</td>
+            <td>{{dataItem.fechfin_libdiario}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1"
+                    (click)="detalleAsientosClick(dataItem)" 
+                    data-backdrop="static" data-keyboard="false">
+                    Detalles
+                </button>
+    
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="modal-body">
+    <!-- [id_ast]="this.id_ast" -->
+    <app-detalle-lib [lib]="Libros" [ast]="ast" [trans]="trans" *ngIf="ActivatedAddEditAstComp"></app-detalle-lib>
+</div>
+
+<div *ngIf="ActivarbtnPDF">
+    <div class="text-center fondo">
+        <h3>LIBRO DIARIO {{Libros.id_libdiario}}</h3>
+        <h5>DEL {{Libros.fechini_libdiario}} AL {{Libros.fechfin_libdiario}}</h5>
+    </div>
+    <div class="modal-footer">
+        <!-- <a routerLink="/coches/seat/ibiza">Seat Ibiza</a> -->
+
+        <button (click)="showPdf2()" type="button" class="btn btn-primary">
+            Generar PDF
+        </button>
+
+    </div>
+    <div class="form-froup">
+        <div class="table-responsive-sm">
+            <table class="table table-hover table-striped navbar-light">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Asiento</th>
+                        <th>Fecha</th>
+                        <th>Detalle</th>
+                        <th>parcial</th>
+                        <th>Debe</th>
+                        <th>Haber</th>
+                        <!-- <th>Opción</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dataItem of ast">
+                        <td>{{dataItem.id_asientos}}</td>
+                        <td>{{dataItem.fech_asientos}}</td>
+                        <td>{{dataItem.deta_transaccion}}</td>
+                        <td>{{dataItem.parc_transaccion}}</td>
+                        <td>{{dataItem.debe_transaccion}}</td>
+                        <td>{{dataItem.habe_transaccion}}</td>
+                        <!-- <td>
+                        <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                            (click)="deleteAstClick()" data-backdrop="static" data-keyboard="false">
+                            Eliminar
+                        </button>
+                    </td> -->
+
+                </tbody>
+                <tfoot class="table-info">
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p>Totales</p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p>{{totalDebe}}</p>
+                    </td>
+                    <td>
+                        <p>{{totalHabe}}</p>
+                    </td>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- 
+<td>
+    <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+        (click)="editUserClick(dataItem)" data-backdrop="static" data-keyboard="false">
+        +Transaccion
+    </button>
+    <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+        (click)="deleteClick(dataItem)" data-backdrop="static" data-keyboard="false">
+        Eliminar
+    </button>
+</td> -->
+
+
+<!-- PRUEBAS DE PDF-->
+<!-- 
+<div>
+    <p>Images ShowPDF 2</p>
+    <button (click)="showPdf2()">Swhoe 222</button>
+    <p>Images ShowPDF </p>
+    <button (click)="showPdf()">Show Pdf</button>
+    <p>Images </p>
+    <button (click)="openPdfImages()">Open PDF - Images</button>
+    <p>Styling</p>
+    <button (click)="openPdfStyle()">Open PDF - Styling</button>
+    <p>Free Style</p>
+   <button (click)="openFreeStyle()">Open PDF - Free Style</button>
+    <p>Styling Dictionaries</p>
+    <button (click)="openPdfStyleDict()">Open PDF - Styling Dictionaries</button>
+    <p>Columns</p>
+    <button (click)="openPdfColumns()">Open PDF - Columns</button>
+    <p>Tables</p>
+    <button (click)="openPdfTables()">Open PDF - Tables</button>
+    <p>Lists</p>
+    <button (click)="openPdfLists()">Open PDF - Lists</button>
+    <p>Static Headers and Footers </p>
+    <button (click)="openPdfHeadersAndFootersStatic()">Open PDF - static headers and footers</button>
+    <p>Dynamic Headers and Footers </p>
+    <button (click)="openPdfHeadersAndFootersDynamic()">Open PDF - dynamic headers and footers</button>
+    <p>Background Layer </p>
+    <button (click)="openPdfBackgroundLayer()">Open PDF - background layer</button>
+    <p>Margins </p>
+    <button (click)="openPdfMargins()">Open PDF - margins</button>
+    <p>Stack Of Paragraphs </p>
+    <button (click)="openPdfStackOfParagrahps()">Open PDF - stack of paragraphs</button>
+    <p>SVGs </p>
+    <button >Open PDF - SVGs</button>
+</div>
+ -->
+
+
+
+

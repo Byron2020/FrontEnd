@@ -1,0 +1,38 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-lib [lib]="lib" *ngIf="ActivatedAddEditCtasComp"></app-add-edit-lib>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover navbar-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>NumLib</th>
+            <th>F inicio</th>
+            <th>F fin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of LibrosList|paginate:{itemsPerPage:7,currentPage:p};">
+            <td>Libro {{dataItem.id_libdiario}}</td>
+            <td>{{dataItem.fechini_libdiario}}</td>
+            <td>{{dataItem.fechfin_libdiario}}</td>
+
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</table>

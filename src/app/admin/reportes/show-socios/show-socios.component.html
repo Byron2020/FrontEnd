@@ -1,0 +1,45 @@
+<div class="modal-dialog-centered ">
+    <label class="col-sm-2 col-form-label fondo">SOCIOS</label>
+    <div class="col-sm-3 ">
+
+        <select class="form-control" id="dato_select" [(ngModel)]="dato_select" (change)="buscarSocio(dato_select)">
+            <option value="">--Seleccionar--</option>
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+    </div>
+</div>
+
+<div *ngIf="ActivarbtnPDF">
+<div class="modal-footer">
+    <!-- <a routerLink="/coches/seat/ibiza">Seat Ibiza</a> -->
+  
+    <button (click)="showPdf2()" type="button" class="btn btn-primary">
+        Generar PDF
+    </button>
+
+</div>
+
+<table class="table table-hover navbar-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Docente</th>
+            <th>Contacto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of SociosList|paginate:{itemsPerPage:7,currentPage:p};">
+            <td>{{dataItem.nomb_socio}}</td>
+            <td>{{dataItem.apel_socio}}</td>
+            <td>{{dataItem.corr_socio}}</td>
+            <td>{{dataItem.deta_tiposocio}}</td>
+            <td>{{dataItem.celu_socio}}</td>
+
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</table>
+</div>

@@ -1,0 +1,70 @@
+<h1 class="text-center">{{AdminTitle}}</h1>
+
+<div class="modal-footer">
+    <!-- (click)="buscarRepLib()" routerLink="show-libdiario" -->
+    <button routerLink="show-socios" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Socios
+    </button>
+    <button routerLink="show-libdiario" type="button"
+        class="btn btn-danger">
+        Libro Diario
+    </button>
+    
+    <button (click)="buscarRepLib()" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Balance de Comprobación
+    </button>
+    <button (click)="buscarRepLib()" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Balance General
+    </button>
+    <button (click)="buscarRepLib()" type="button" class="btn btn-danger" data-backdrop="static" data-keyboard="false">
+        Estado de Resultados
+    </button>
+    <button routerLink="/admin" type="button" class="btn btn-secondary" data-backdrop="static" data-keyboard="false">
+        Regresar
+    </button>
+</div>
+
+<!-- <td>
+                        <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                            (click)="deleteAstClick()" data-backdrop="static" data-keyboard="false">
+                            Eliminar
+                        </button>
+                    </td> -->
+
+<!-- <div class="fondo">
+    <h3 class="text-center">LIBRO DIARIO {{lib[0].id_libdiario}}</h3>
+    <h5 class="text-center">del {{fechini_libdiario}} al {{fechfin_libdiario}}</h5>
+</div>
+<div *ngIf="ActivarbtnPDF" class="modal-footer">
+    <button (click)="showPdf2()" type="button" class="btn btn-primary">
+        Generar PDF
+    </button>
+</div>
+<div class="form-froup fondo">
+    <div class="table-responsive-sm">
+        <table class="table table-stripe navbar-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Asiento</th>
+                    <th>Detalle</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let dataItem of AsientosList">
+                <tr>
+                    <td>{{dataItem.fech_asientos}}</td>
+                    <td>{{dataItem.id_asientos}}</td>
+                    <td>{{dataItem.deta_transaccion}}</td>
+                    <td>{{dataItem.valor_transaccion}}</td>
+                    
+                </tr>
+                <th scope="row">R/f {{dataItem.obse_asientos}}
+                </th>
+            </tbody>
+        </table>
+    </div>
+</div>
+ -->
+
+<router-outlet></router-outlet>

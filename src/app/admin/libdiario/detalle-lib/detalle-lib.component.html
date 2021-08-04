@@ -1,0 +1,68 @@
+<div class="fondo">
+   <!--  <h3 class="text-center">LIBRO DIARIO {{lib.id_libdiario}} {{lib.id_libdiario}}</h3>
+
+    <h5 class="text-center">DEL {{lib.fechini_libdiario}} AL {{lib.fechfin_libdiario}}</h5> -->
+</div>
+<div class="modal-footer">
+    <button (click)="openPdfTables()" type="button" class="btn btn-primary" >
+        PDF
+    </button>
+
+    <button (click)="addAstClick()" type="button" class="btn btn-primary" >
+        Agregar Asiento
+    </button>
+    <button  type="button" class="btn btn-primary">
+        Regresar
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeAstClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-as [ast]="ast" *ngIf="ActivatedAddEditAstComp"></app-add-as>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover navbar-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Asiento</th>
+            <th>Fecha</th>
+            <th>Referencia</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of ast|paginate:{itemsPerPage:7,currentPage:p};">
+            <td>{{dataItem.id_asientos}}</td>
+            <td>{{dataItem.fech_Asientos}}</td>
+            <td>{{dataItem.obse_asientos}}</td>
+            <td>
+                 <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                    (click)="editUserClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Editar
+                </button>
+                <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+                    (click)="deleteAsientosClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Eliminar
+                </button>
+            </td>
+            
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</table>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,27 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+  
+      <!--    <div class="fadeIn first">
+          <h3 class="text-center">APPOCH</h3>
+        </div>
+         -->
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group">
+          <label>Recordar contraseña:</label>
+          <input type="email" class="fadeIn Second" name="emai_user" [(ngModel)]="formModel.emai_user" required
+            placeholder="user@example.com">
+        </div>
+
+        <div class="">
+          <button type="submit" class="btn btn-lg" [disabled]="f.invalid">Enviar</button>
+          <div class="nav-link"></div>
+  
+        </div>
+  
+      </form>
+      <a routerLink="../user/loggin">Iniciar Sesión</a>
+      <!-- Remind Passowrd     routerLink="login" -->
+    </div>
+  
+  </div>
+  

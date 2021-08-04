@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-us [user]="user" *ngIf="ActivatedAddEditUserComp"></app-add-edit-us>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover navbar-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>Correo</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of userList|paginate:{itemsPerPage:7,currentPage:p};">
+            <td>{{dataItem.id_user}}</td>
+            <td>{{dataItem.nomb_user}}</td>
+            <td>{{dataItem.emai_user}}</td>
+            <td>
+               <!--  <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                    (click)="editUserClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Editar
+                </button> -->
+                <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+                    (click)="deleteClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Eliminar
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</table>

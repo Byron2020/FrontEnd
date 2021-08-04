@@ -1,0 +1,152 @@
+<div class="modal-dialog-centered">
+
+    <button type="button" (click)="buscarClick(dato_search)" class="btn btn-primary">BUSCAR</button>
+    <div class="col-sm-2">
+        <input type="number" class="form-control" [(ngModel)]="dato_search" placeholder="Número del libro" required>
+    </div>
+    <div class="col-sm-3 ">
+
+        <select class="form-control" id="dato_select" [(ngModel)]="dato_select" (change)="buscarClick2(dato_select)">
+            <option value="">--MES--</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-detalle-lib [ast]="ast" [dato_id]="dato_id" *ngIf="ActivatedAddEditAstComp"></app-detalle-lib>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover navbar-light">
+    <thead>
+        <tr>
+            <th>#Libro</th>
+            <th>F inicio</th>
+            <th>F fin</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of LibrosList">
+            <td>{{dataItem.id_libdiario}}</td>
+            <td>{{dataItem.fechini_libdiario}}</td>
+            <td>{{dataItem.fechfin_libdiario}}</td>
+            <td>
+                <!-- ;detalleTransaccionesClick(dataItem) -->
+                <button type="button" class="btn btn-light mr-1" (click)="detalleAsientosClick(dataItem)">
+                    Detalles
+                </button>
+                <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+                    (click)="deleteLibDiarioClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Eliminar
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal-body">
+    <!-- [id_ast]="this.id_ast" -->
+    <app-detalle-lib [lib]="Libros" [ast]="ast" [trans]="trans" *ngIf="ActivatedAddEditAstComp"></app-detalle-lib>
+</div>
+
+<div *ngIf="ActivarbtnPDF">
+    <div class="text-center fondo">
+        <h3>LIBRO DIARIO {{Libros.id_libdiario}}</h3>
+        <h5>DEL {{Libros.fechini_libdiario}} AL {{Libros.fechfin_libdiario}}</h5>
+    </div>
+    <div class="modal-footer">
+        <!-- <a routerLink="/coches/seat/ibiza">Seat Ibiza</a> -->
+        <button
+            routerLink="/admin/libdiario/id/asientos/{{Libros.id_libdiario}}/{{Libros.fechini_libdiario}}/{{Libros.fechfin_libdiario}}"
+            type="button" class="btn btn-danger">
+            Asientos
+        </button>
+        <button (click)="showPdf2()" type="button" class="btn btn-danger">
+            Generar PDF
+        </button>
+        <button (click)="showPdf2()" type="button" class="btn btn-danger">
+            Generar PDF
+        </button>
+
+    </div>
+    <div class="form-froup">
+        <div class="table-responsive-sm">
+            <table class="table table-hover table-striped navbar-light">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Asiento</th>
+                        <th>Fecha</th>
+                        <th>Detalle</th>
+                        <th>parcial</th>
+                        <th>Debe</th>
+                        <th>Haber</th>
+                        <!-- <th>Opción</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dataItem of ast">
+                        <td>{{dataItem.id_asientos}}</td>
+                        <td>{{dataItem.fech_asientos}}</td>
+                        <td>{{dataItem.deta_transaccion}}</td>
+                        <td>{{dataItem.parc_transaccion}}</td>
+                        <td>{{dataItem.debe_transaccion}}</td>
+                        <td>{{dataItem.habe_transaccion}}</td>
+                        <!-- <td>
+                        <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                            (click)="deleteAstClick()" data-backdrop="static" data-keyboard="false">
+                            Eliminar
+                        </button>
+                    </td> -->
+
+                </tbody>
+                <tfoot class="table-info">
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p>Totales</p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p>{{totalDebe}}</p>
+                    </td>
+                    <td>
+                        <p>{{totalHabe}}</p>
+                    </td>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

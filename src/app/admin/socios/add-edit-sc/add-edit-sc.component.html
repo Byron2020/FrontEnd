@@ -1,0 +1,52 @@
+<div class="form-froup row">
+
+    <h4 class="col-sm-11 text-center col-form-label">{{ModalTitle}}</h4>
+    
+    <label class="col-sm-2 col-form-label">Correo</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="corr_socio">
+    </div>
+    <label class="col-sm-2 col-form-label">Nombres</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="nomb_socio">
+    </div>
+    <label class="col-sm-2 col-form-label">Apellidos</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="apel_socio">
+    </div>
+    <label class="col-sm-2 col-form-label">Celular</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="celu_socio">
+    </div>
+    <label class="col-sm-2 col-form-label">Dirección</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="dire_socio">
+    </div>
+    <label class="col-sm-6 col-form-label">Tipo</label>
+    <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="id_tiposocio">
+            <option [defaultSelected]>--Seleccionar--</option>
+            <option *ngFor="let tip of tiposocios" [ngValue]="tip.id_tiposocio">
+                Por: {{tip.deta_tiposocio}}
+            </option>
+        </select>
+    </div>
+    <label class="col-sm-6 col-form-label">Estado</label>
+    <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="id_estado">
+            <option value=""selected>--Seleccionar--</option>
+            <option *ngFor="let est of estados" [ngValue]="est.id_estado">
+                {{est.deta_estado}}
+            </option>
+        </select>
+    </div>
+
+</div>
+
+<button (click)="addSocios()" *ngIf="sc.id_socio==0" class="btn btn-primary">
+    Ingresar
+</button>
+
+<button (click)="updateSocio()" *ngIf="sc.id_socio!=0" class="btn btn-primary">
+    Editar
+</button>

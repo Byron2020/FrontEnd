@@ -1,0 +1,42 @@
+
+<div class="form-froup row navbar-light" >
+    <h4 class="col-sm-11 text-center col-form-label">{{ModalTitle}}</h4>
+    
+    <label class="col-sm-2 col-form-label">Grupo</label>
+    <div class="col-sm-10">
+        <select class="form-control" [(ngModel)]="id_grupocuentas" (change)="loadSubGrupocuentas()">
+            <option selected>--Seleccionar--</option>
+            <option *ngFor="let Grupo of GrupoCuentasList" [value]="Grupo.id_grupocuentas">
+                {{Grupo.id_grupocuentas}}{{Grupo.nomb_grupocuentas}}
+            </option>
+        </select>
+    </div>
+    <label class="col-sm-2 col-form-label">Sub Grupo</label>
+    <div class="col-sm-10">
+        <select class="form-control" [(ngModel)]="id_subgrupocuentas" (change)="capturar()">
+            <option [defaultSelected]>--Seleccionar--</option>
+            <option *ngFor="let subGrupo of SubGrupoCuentasList" [ngValue]="subGrupo.id_subgrupocuentas">
+                {{subGrupo.id_subgrupocuentas}}{{subGrupo.nomb_subgrupocuentas}}
+            </option>
+        </select>
+    </div>
+    <label class="col-sm-2 col-form-label">Codigo</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="codi_cuentas" disabled>
+    </div>
+    <label class="col-sm-2 col-form-label">Nombre cuenta</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="nomb_cuentas" placeholder="Ingresar dato">
+    </div>
+
+    <div class="modal-footer">
+        <button (click)="addCuentas()" class="btn btn-primary">
+            Ingresar
+        </button>
+    </div>
+    <div class="modal-footer">
+        <button (click)="limpiarClick()" class="btn btn-secondary">
+            Limpiar
+        </button>
+    </div>
+</div>

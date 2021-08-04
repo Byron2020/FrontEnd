@@ -1,0 +1,66 @@
+<div class="modal-dialog-centered" >
+    <button type="button" (click)="buscarSociosClick(dato_search)" class="btn btn-danger">Buscar</button>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="dato_search" 
+        placeholder="Correo / Nombres / Apellidos">
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-sc [sc]="sc" *ngIf="ActivatedAddEditSociosComp"></app-add-edit-sc>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped navbar-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Docente</th>
+            <th>Contacto</th>
+            <th>Dirección</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of SociosList">
+            
+            <td>{{dataItem.id_socio}}</td>
+            <td>{{dataItem.nomb_socio}}</td>
+            <td>{{dataItem.apel_socio}}</td>
+            <td>{{dataItem.corr_socio}}</td>
+            <td>{{dataItem.deta_tiposocio}}</td>
+            <td>{{dataItem.celu_socio}}</td>
+            <td>{{dataItem.dire_socio}}</td>
+            <td>
+                <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+                    (click)="editSociosClick(dataItem)"  data-backdrop="static" data-keyboard="false">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+                    (click)="deleteSociosClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

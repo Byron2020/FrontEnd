@@ -1,0 +1,59 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <!--    <div class="fadeIn first">
+        <h3 class="text-center">APPOCH</h3>
+      </div>
+       -->
+   <!--     <form [formGroup]="form2" (ngSubmit)="saveData()">
+        <div class="field">
+          <label class="label">Age</label>
+          <div class="control">
+            <input
+              class="input"
+              [class.is-danger]="form2.get('age').dirty && form2.get('age').invalid"
+              type="text"
+              formControlName="age" min="22"
+            />
+            <input
+            class="input"
+            [class.is-danger]="form2.get('email').dirty && form2.get('email').invalid"
+            type="text"
+            formControlName="email"
+          />
+          </div>
+          {{ form2.get("age").errors | json }}
+          {{ form2.get("email").errors | json }}
+        </div>
+        <div>
+          <button type="submit"  [disabled]="form2.invalid">SAve</button>
+        </div>
+       </form> -->
+
+
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="form-group">
+        <label>Correo:</label>
+        <input type="email" class="fadeIn Second" name="emai_user" [(ngModel)]="formModel.emai_user" required
+          placeholder="user@example.com">
+      </div>
+      <div class="form-group">
+        <label>Contraseña:</label>
+        <input type="password" class="fadeIn Three" name="pass_user" [(ngModel)]="formModel.pass_user" required
+          placeholder="***********">
+      </div>
+      <div class="">
+        <button type="submit" class="btn btn-lg" [disabled]="!f.form.valid">Login</button>
+        <div class="nav-link"></div>
+
+      </div>
+     
+    </form>
+    <a routerLink="/reset-pass">Olvidó su contraseña</a>
+    <!-- Remind Passowrd     routerLink="login" -->
+  </div>
+
+</div>
+
+
+<router-outlet></router-outlet>

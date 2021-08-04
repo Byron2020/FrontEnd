@@ -1,0 +1,114 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<app-add-edit-sc [sc]="sc" *ngIf="ActivatedAddEditSociosComp"></app-add-edit-sc>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="table-responsive">
+	<table class="table navbar-light">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombres</th>
+				<th scope="col">Apellidos</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Docente</th>
+				<th scope="col">Contacto</th>
+				<th scope="col">Dirección</th>
+
+			</tr>
+		</thead>
+
+		<tbody>
+			<!-- <th scope="row">1</th> -->
+			<tr *ngFor="let dataItem of SociosList|paginate:{itemsPerPage:7,currentPage:p};">
+				<td>{{dataItem.id_socio}}</td>
+				<td>{{dataItem.nomb_socio}}</td>
+				<td>{{dataItem.apel_socio}}</td>
+				<td>{{dataItem.corr_socio}}</td>
+				<td>{{dataItem.deta_tiposocio}}</td>
+				<td>{{dataItem.celu_socio}}</td>
+				<td>{{dataItem.dire_socio}}</td>
+			</tr>
+		</tbody>
+		<pagination-controls (pageChange)="p= $event"></pagination-controls>
+	</table>
+</div>
+
+
+
+<script type="text/javascript">
+
+	$('#content__buttom').click(function () {
+		location.reload();
+	});
+
+	//10000 por campo
+	$('#message1').fadeOut(10000);
+	$('#message2').fadeOut(20000);
+	$('#message3').fadeOut(30000);
+	$('#message').fadeOut(50000);
+
+
+	$(document).ready(function () {
+		$('#book').DataTable({
+			responsive: true,
+			scrollX: true,
+			autoWidth: false,
+			"language": { "url": "DataTables/languaje.json" },
+			columnDefs: [
+				{ targets: 4, bSortable: true },
+			],
+			lengthMenu: [25, 50],
+		});
+	});
+
+
+	$('.delete').on('click', function (event) {
+		event.preventDefault();
+		var datos = $(this).closest('.data__info').data();
+		cargarFormulario(datos);
+		$('.adm-sec__delete').slideToggle();
+	});
+	$('.update').on('click', function (event) {
+		event.preventDefault();
+		var datos = $(this).closest('.data__info').data();
+		cargarFormulario(datos);
+		$('.adm-sec__update').slideToggle();
+	});
+
+	$('.del').on('click', function (event) {
+		event.preventDefault();
+		eliminar();
+		$('.adm-sec__delete').slideToggle();
+	});
+	function cargarFormulario(datos) {
+		var d = new Date();
+		var fecha = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
+
+		$('.action__form')[0].reset();
+		$(".action__form input[name=id_cuentas]").val(datos['id_cuentas']);
+		$(".action__form input[name=deta_cuentas]").val(datos['deta_cuentas']);
+		$(".action__form input[name=valo_cuentas]").val(datos['valo_cuentas']);
+		$(".action__form select[name=esta_cuentas]").val(datos['esta_cuentas']);
+		$(".action__form textarea[name=obse_cuentas]").val(datos['obse_cuentas']);
+		$(".action__form input[name=fech_cuentas]").val(fecha);
+	}
+	$('input.cancel__btn').click(function () {
+		$(this).closest('.adm-sec__delete , .adm-sec__update ').slideToggle();
+		$('#borrar')[0].reset();
+	});
+</script>

@@ -1,0 +1,103 @@
+<h1 class="text-center">{{AdminTitle}}</h1>
+<h3>Libro: {{this.id}}</h3>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" (click)="addAstClick()"
+        data-backdrop="static" data-keyboard="false">
+        Nuevo
+    </button>
+
+    <button (click)="addAstClick()" type="button" class="btn btn-primary" >
+        Agregar Asiento
+    </button>
+    <button routerLink='/admin/libdiario/search-lib' type="button" class="btn btn-primary">
+        Regresar
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-ast [ast]="ast" *ngIf="ActivatedAddEditAstComp"></app-add-edit-ast>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+<table class="table table-hover navbar-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>Asiento</th>
+            <th>Fecha</th>
+            <th>Referencia</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of ast|paginate:{itemsPerPage:7,currentPage:p};">
+            <td>{{dataItem.id_asientos}}</td>
+            <td>{{dataItem.fech_asientos}}</td>
+            <td>{{dataItem.obse_asientos}}</td>
+            <td>
+                 <button type="button" class="btn btn-light mr-1"
+                    (click)="detalleTransaccionesClick(dataItem)">
+                    Detalles
+                </button>
+                <button type="button" class="btn btn-light mr-1" data-target="#exampleModal"
+                    (click)="deleteAsientosClick(dataItem)" data-backdrop="static" data-keyboard="false">
+                    Eliminar
+                </button>
+            </td>
+            
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p= $event"></pagination-controls>
+</table>
+</div>
+
+<div *ngIf="ActivarTabla">
+  
+    <div class="modal-footer">
+        <!-- <a routerLink="/coches/seat/ibiza">Seat Ibiza</a> -->
+
+        <button (click)="showPdf2()" type="button" class="btn btn-primary">
+            Generar PDF
+        </button>
+
+    </div>
+
+        <div class="table-responsive-sm">
+            <table class="table table-hover table-striped navbar-light">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Detalle</th>
+                        <th>Parcial</th>
+                        <th>Debe</th>
+                        <th>Haber</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of TransaccionesList">
+                        <td>{{data.deta_transaccion}}</td>
+                        <td>{{data.parc_transaccion}}</td>
+                        <td>{{data.debe_transaccion}}</td>
+                        <td>{{data.habe_transaccion}}</td>
+                    </tr>
+                </tbody>
+               
+            </table>
+        </div>
+  
+</div>
+
+<router-outlet></router-outlet>
