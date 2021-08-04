@@ -1,7 +1,6 @@
 import { AdminComponent } from './admin/admin/admin.component';
 import { Login2Component } from './user/login2/login2.component';
 import { HomeComponent } from './layouts/home/home.component';
-import {LoginComponent} from './user/login/login.component'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
